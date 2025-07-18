@@ -6,6 +6,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
 import axios from 'axios';
 import toast from 'react-hot-toast'; // --- NEW ---
+import api from '../api';
+api.get('/api/products');
 
 const CartPage = () => {
     const { userData, getCart, clearCart } = useContext(UserContext);

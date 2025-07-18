@@ -1,3 +1,6 @@
+import api from '../api';
+api.get('/api/products');
+
 /*
  * We apply the same efficient state update logic to this page for consistency.
  */

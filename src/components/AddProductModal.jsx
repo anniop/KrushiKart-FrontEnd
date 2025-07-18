@@ -4,7 +4,8 @@
 import React, { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 import { SellerContext } from '../context/SellerContext';
-
+import api from '../api';
+api.get('/api/products');
 const AddProductModal = ({ onClose, onProductAdded, productToEdit }) => {
     const [productData, setProductData] = useState({
         name: '',

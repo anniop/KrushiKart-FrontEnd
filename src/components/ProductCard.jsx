@@ -1,3 +1,6 @@
+import api from '../api';
+api.get('/api/products');
+
 /*
  * The `handleAddToCart` function now uses the more efficient `updateCart`
  * method, which gets the updated cart directly from the API response.

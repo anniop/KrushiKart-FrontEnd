@@ -1,3 +1,6 @@
+import api from '../api';
+api.get('/api/products');
+
 /*
  * This is the key fix. The login form now fetches the user's cart
  * immediately after a successful login, ensuring the cart state is

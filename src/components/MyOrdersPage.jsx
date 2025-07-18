@@ -1,3 +1,6 @@
+import api from '../api';
+api.get('/api/products');
+
 /*
  * This version adds dynamic color-coding to the order status badge,
  * making it easier for users to quickly see the state of their orders.

@@ -1,3 +1,6 @@
+import api from '../api';
+api.get('/api/products');
+
 /*
  * This is the login page for sellers. It looks similar to the user login
  * but hits the /api/sellers/login endpoint.

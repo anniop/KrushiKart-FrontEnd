@@ -1,3 +1,6 @@
+import api from '../api';
+api.get('/api/products');
+
 /*
  * The "My Orders" tab now includes a dropdown to change the status of each order.
  * This provides the final piece of core functionality for sellers.
