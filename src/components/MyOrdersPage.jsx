@@ -1,14 +1,13 @@
-import api from '../api';
-api.get('/api/products');
-
 /*
- * This version adds dynamic color-coding to the order status badge,
- * making it easier for users to quickly see the state of their orders.
+ * This version fixes the 'NaN' bug by adding a defensive check. It ensures
+ * that if a product in an order is missing (e.g., deleted), the page
+ * will still render correctly without crashing or showing 'NaN'.
  */
 import React, { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../context/UserContext';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import api from '../api'; // Use the api instance
 
 const MyOrdersPage = () => {
     const [orders, setOrders] = useState([]);
@@ -33,18 +32,12 @@ const MyOrdersPage = () => {
         fetchOrders();
     }, [userData.token]);
 
-    // --- NEW --- Helper function to get the color class for a status
     const getStatusClass = (status) => {
         switch (status) {
-            case 'Delivered':
-                return 'bg-green-100 text-green-800';
-            case 'Shipped':
-                return 'bg-blue-100 text-blue-800';
-            case 'Cancelled':
-                return 'bg-red-100 text-red-800';
-            case 'Pending':
-            default:
-                return 'bg-yellow-100 text-yellow-800';
+            case 'Delivered': return 'bg-green-100 text-green-800';
+            case 'Shipped': return 'bg-blue-100 text-blue-800';
+            case 'Cancelled': return 'bg-red-100 text-red-800';
+            case 'Pending': default: return 'bg-yellow-100 text-yellow-800';
         }
     };
 
@@ -67,18 +60,27 @@ const MyOrdersPage = () => {
                                     <p className="font-bold">Order ID: <span className="font-normal text-gray-600 text-sm">{order._id}</span></p>
                                     <p className="font-bold">Date: <span className="font-normal text-gray-600">{new Date(order.createdAt).toLocaleDateString()}</span></p>
                                 </div>
-                                {/* --- UPDATED --- Use the helper function for dynamic classes */}
                                 <div className={`mt-4 sm:mt-0 px-3 py-1 text-sm font-semibold rounded-full self-start ${getStatusClass(order.status)}`}>
                                     {order.status}
                                 </div>
                             </div>
                             <div>
-                                {order.products.map(({ product, quantity }) => (
-                                    <div key={product._id} className="flex items-center justify-between py-2">
-                                        <p>{product.name} <span className="text-gray-500">x {quantity}</span></p>
-                                        <p>₹{(product.price * quantity).toFixed(2)}</p>
-                                    </div>
-                                ))}
+                                {order.products.map(({ product, quantity }) => {
+                                    // --- FIX --- Add a check to see if product exists
+                                    if (!product) {
+                                        return (
+                                            <div key={Math.random()} className="flex items-center justify-between py-2 text-gray-400 italic">
+                                                <p>This product is no longer available</p>
+                                            </div>
+                                        );
+                                    }
+                                    return (
+                                        <div key={product._id} className="flex items-center justify-between py-2">
+                                            <p>{product.name} <span className="text-gray-500">x {quantity}</span></p>
+                                            <p>₹{(product.price * quantity).toFixed(2)}</p>
+                                        </div>
+                                    );
+                                })}
                             </div>
                             <div className="text-right font-bold text-lg mt-4 pt-4 border-t">
                                 Total: ₹{order.totalAmount.toFixed(2)}
