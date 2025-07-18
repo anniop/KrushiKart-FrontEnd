@@ -43,7 +43,7 @@ const AddProductModal = ({ onClose, onProductAdded, productToEdit }) => {
         
         if (productToEdit) {
             try {
-                await axios.put(`/api/products/update/${productToEdit._id}`, productData, {
+                await api.put(`/api/products/update/${productToEdit._id}`, productData, {
                     headers: { 'x-auth-token': sellerData.token }
                 });
                 onProductAdded();

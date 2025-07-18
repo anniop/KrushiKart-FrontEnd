@@ -16,7 +16,7 @@ const CartPage = () => {
 
     const handleRemoveItem = async (productId) => {
         try {
-            await axios.delete(`/api/cart/remove/${productId}`, {
+            await api.delete(`/api/cart/remove/${productId}`, {
                 headers: { 'x-auth-token': token }
             });
             getCart(token);

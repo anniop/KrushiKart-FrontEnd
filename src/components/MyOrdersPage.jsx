@@ -20,7 +20,7 @@ const MyOrdersPage = () => {
             if (!userData.token) return;
             try {
                 setLoading(true);
-                const response = await axios.get('/api/orders', {
+                const response = await api.get('/api/orders', {
                     headers: { 'x-auth-token': userData.token }
                 });
                 setOrders(response.data);

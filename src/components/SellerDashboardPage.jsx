@@ -31,7 +31,7 @@ const SellerDashboardPage = () => {
         if (!sellerData.token) return;
         try {
             setLoading(true);
-            const response = await axios.get('/api/sellers/my-products', {
+            const response = await api.get('/api/sellers/my-products', {
                 headers: { 'x-auth-token': sellerData.token }
             });
             setMyProducts(response.data);

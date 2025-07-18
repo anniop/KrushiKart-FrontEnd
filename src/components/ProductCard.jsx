@@ -33,7 +33,7 @@ const ProductCard = ({ product }) => {
         }
         try {
             // The backend POST request returns the newly updated cart
-            const response = await axios.post('/api/cart/add', 
+            const response = await api.post('/api/cart/add', 
                 { productId: product._id, quantity: 1 },
                 { headers: { 'x-auth-token': userData.token } }
             );

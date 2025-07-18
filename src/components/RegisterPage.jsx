@@ -35,7 +35,7 @@ const RegisterPage = () => {
                 phone: formData.phone,
                 password: formData.password
             };
-            await axios.post("/api/users/register", newUser);
+            await api.post("/api/users/register", newUser);
             toast.success('Registration successful! Please log in.');
             navigate('/login');
         } catch (err) {

@@ -1,6 +1,4 @@
 import api from '../api';
-api.get('/api/products');
-
 /*
  * This is the key fix. The login form now fetches the user's cart
  * immediately after a successful login, ensuring the cart state is
@@ -26,7 +24,7 @@ const LoginPage = () => {
         setError('');
         try {
             const loginUser = { phone, password };
-            const loginRes = await axios.post('/api/users/login', loginUser);
+            const loginRes = await api.post('/api/users/login', loginUser);
             const token = loginRes.data.token;
             
             setUserData({

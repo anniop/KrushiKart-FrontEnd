@@ -23,7 +23,7 @@ const SellerLoginPage = () => {
         setError('');
         try {
             const loginSeller = { phone, password };
-            const loginRes = await axios.post('/api/sellers/login', loginSeller);
+            const loginRes = await api.post('/api/sellers/login', loginSeller);
             
             setSellerData({
                 token: loginRes.data.token,
