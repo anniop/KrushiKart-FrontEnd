@@ -9,7 +9,7 @@ export default defineConfig({
       // This tells Vite to forward any request that starts with /api
       // to your backend server.
       '/api': {
-        target: 'http://localhost:5000',
+        target: 'https://krushikart-backend.onrender.com/',
         changeOrigin: true,
       },
     }
