@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #F7F6F2;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@layer components {
+  /* Brand Colors */
+  .bg-brand-green { @apply bg-[#285430]; }
+  .text-brand-green { @apply text-[#285430]; }
+  .border-brand-green { @apply border-[#285430]; }
+  .bg-brand-light { @apply bg-[#F7F6F2]; }
+  .bg-brand-orange { @apply bg-[#DE834D]; }
+  .text-brand-orange { @apply text-[#DE834D]; }
+  .focus\:ring-brand-orange { @apply focus:ring-[#DE834D]; }
+  /* --- NEW --- A lighter orange for focus rings */
+  .focus\:ring-brand-orange-light { @apply focus:ring-[#f5a679]; }
+  
+  /* Primary Button */
+  .btn-primary {
+    @apply bg-brand-orange text-white font-semibold rounded-lg py-2 px-5 transition-all duration-300 shadow-sm;
+  }
+  .btn-primary:hover {
+    @apply bg-[#c9713d] shadow-lg -translate-y-px;
+  }
+
+  /* Secondary Button (for cards) */
+  .btn-secondary {
+    @apply bg-brand-green bg-opacity-10 text-brand-green font-semibold rounded-lg py-2 px-4 transition-all duration-300 text-sm;
+  }
+  .btn-secondary:hover {
+    @apply bg-brand-green text-white shadow-md;
+  }
+}
+
+@layer utilities {
+    /* --- NEW --- Text shadow for readability on video */
+    .text-shadow {
+        text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }
+    .text-shadow-lg {
+        text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+}
