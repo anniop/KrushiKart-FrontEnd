@@ -30,24 +30,24 @@ const HomePage = () => {
         { name: 'Tool', icon: <ToolIcon /> },
     ];
 
-    useEffect(() => {
-        const fetchProducts = async () => {
-            try {
-                const response = await axios.get(`/api/products?t=${new Date().getTime()}`);
-                if (response.data) {
-                    setProducts(response.data);
+     useEffect(() => {
+            const fetchProducts = async () => {
+                try {
+                    // --- FIX --- Use api.get instead of axios.get
+                    const response = await api.get(`/api/products?t=${new Date().getTime()}`);
+                    if (response.data) {
+                        setProducts(response.data);
+                    }
+                    setError(null);
+                } catch (err) {
+                    setError("Failed to fetch products.");
+                    console.error("Axios error:", err);
+                } finally {
+                    setLoading(false);
                 }
-                setError(null);
-            } catch (err) {
-                setError("Failed to fetch products. Please make sure the backend server is running.");
-                console.error("Axios error:", err);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchProducts();
-    }, []);
-
+            };
+            fetchProducts();
+        }, []);
     const filteredProducts = products.filter(product =>
         product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         product.category.toLowerCase().includes(searchTerm.toLowerCase())
